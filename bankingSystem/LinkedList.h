@@ -20,6 +20,7 @@ public:
         Node<T> *nextNode = nullptr;
         while (current != nullptr) {
             nextNode = current->next;
+            delete current->data;
             delete current;
             current = nextNode;
         }
