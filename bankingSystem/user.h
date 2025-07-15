@@ -3,6 +3,9 @@
 
 #include <QString>
 
+template<typename T>
+class LinkedList;
+
 class User
 {
 protected:
@@ -25,10 +28,15 @@ public:
 
     void setName(QString newName);
     void setLastName(QString newLastName);
-    void setNationalCode();
-    void setUsername();
+    void setNationalCode(QString newNationalCode);
+    void setUsername(QString newUserName);
     void setAge(int newAge);
     void setPassword(QString newPassword);
+
+    static User* signUp(LinkedList<User*>& usersList, QString name,  QString lastName,
+                        QString nationalCode,  QString username,QString password, int age);
+
+    static User* logIn(LinkedList<User*>& usersList, const QString& username, const QString& password);
 };
 
 #endif // USER_H
