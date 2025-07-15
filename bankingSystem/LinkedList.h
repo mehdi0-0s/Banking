@@ -48,7 +48,7 @@ public:
         Node<T>* current = head;
         Node<T>* previous = nullptr;
 
-        while (current != nullptr && !(current->data == data))
+        while (current != nullptr && !(*(current->data) == *data))
         {
             previous = current;
             current = current->next;
@@ -67,7 +67,7 @@ public:
         {
             previous->next = current->next;
         }
-
+        delete current->data;
         delete current;
         return true;
     }
@@ -78,7 +78,7 @@ public:
 
         while(current != nullptr)
         {
-            if(current->data == data)
+            if(*(current->data) == *data)
             {
                 return current;
             }
