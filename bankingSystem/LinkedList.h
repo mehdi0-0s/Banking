@@ -26,6 +26,21 @@ public:
         head = nullptr;
     }
 
+    void insertAtEnd(T data)
+    {
+        Node<T> *newNode = new Node<T>(data);
+        if(head == nullptr)
+        {
+            head = newNode;
+            return;
+        }
+        Node<T> *temp = head;
+        while(temp->next != nullptr)
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
     Node<T>* getHead(){return head;}
 };
 
