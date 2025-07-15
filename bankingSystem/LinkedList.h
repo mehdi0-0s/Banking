@@ -70,6 +70,22 @@ public:
         delete current;
         return true;
     }
+
+    Node<T>* findNode(T data)
+    {
+        Node<T>* current = head;
+
+        while(current != nullptr)
+        {
+            if(current->data == data)
+            {
+                return current;
+            }
+            current = current->next;
+        }
+        return nullptr;
+    }
+
     Node<T>* getHead(){return head;}
 };
 
