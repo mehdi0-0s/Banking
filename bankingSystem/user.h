@@ -33,6 +33,9 @@ public:
     void setAge(int newAge);
     void setPassword(QString newPassword);
 
+    bool operator==(const User& other) const;
+    bool operator!=(const User& other) const;
+
     static User* signUp(LinkedList<User*>& usersList, QString name,  QString lastName,
                         QString nationalCode,  QString username,QString password, int age);
 
