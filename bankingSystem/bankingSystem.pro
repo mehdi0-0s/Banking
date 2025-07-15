@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    user.cpp
 
 HEADERS += \
     LinkedList.h \
     Node.h \
-    mainwindow.h
+    mainwindow.h \
+    user.h
 
 FORMS += \
     mainwindow.ui
