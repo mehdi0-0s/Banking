@@ -41,6 +41,35 @@ public:
         }
         temp->next = newNode;
     }
+
+    bool deleteNode(T data)
+    {
+        Node<T>* current = head;
+        Node<T>* previous = nullptr;
+
+        while (current != nullptr && !(current->data == data))
+        {
+            previous = current;
+            current = current->next;
+        }
+
+        if (current == nullptr)
+        {
+            return false;
+        }
+
+        if (previous == nullptr)
+        {
+            head = current->next;
+        }
+        else
+        {
+            previous->next = current->next;
+        }
+
+        delete current;
+        return true;
+    }
     Node<T>* getHead(){return head;}
 };
 
