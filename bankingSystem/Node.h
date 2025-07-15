@@ -4,11 +4,9 @@
 
 template<typename T>
 class Node{
-private:
+public:
     T data;
     Node<T> *next;
-
-public:
     Node(T data)
     {
         this->data = data;
