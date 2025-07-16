@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     account.cpp \
     admin.cpp \
+    currentaccount.cpp \
     customer.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     Node.h \
     account.h \
     admin.h \
+    currentaccount.h \
     customer.h \
     mainwindow.h \
     savingaccount.h \
