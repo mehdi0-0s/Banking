@@ -12,7 +12,7 @@ private:
     LinkedList<Account *> accounts;
 public:
     Customer(QString name, QString lastName,  QString nationalCode,QString username, QString password, int age);
-
+    LinkedList<Account*>& getAccounts();
 };
 
 #endif // CUSTOMER_H
