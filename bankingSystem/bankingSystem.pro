@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     admin.cpp \
+    customer.cpp \
     main.cpp \
     mainwindow.cpp \
     user.cpp
@@ -18,6 +19,7 @@ HEADERS += \
     LinkedList.h \
     Node.h \
     admin.h \
+    customer.h \
     mainwindow.h \
     user.h
 
