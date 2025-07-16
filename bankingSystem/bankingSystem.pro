@@ -14,6 +14,7 @@ SOURCES += \
     customer.cpp \
     main.cpp \
     mainwindow.cpp \
+    savingaccount.cpp \
     user.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     admin.h \
     customer.h \
     mainwindow.h \
+    savingaccount.h \
     user.h
 
 FORMS += \
