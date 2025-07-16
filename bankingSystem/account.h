@@ -6,7 +6,7 @@
 
 class Account
 {
-private:
+protected:
     QString cardNumber;
     QString accountNumber;
     QString shebaNumber;
