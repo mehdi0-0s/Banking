@@ -18,3 +18,11 @@ Customer* Admin::createCustomer(LinkedList<User*>& users, QString name,QString l
     users.insertAtEnd(newCustomer);
     return newCustomer;
 }
+
+
+bool Admin::removeCustomer(LinkedList<User*> &users,QString username)
+{
+    User delUser("", "", "", username, "", 0);
+
+    return users.deleteNode(&delUser);
+}

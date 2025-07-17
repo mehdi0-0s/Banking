@@ -19,6 +19,7 @@ public:
                             QString nationalCode, QString username,QString password, int age);
 
 
+    bool removeCustomer(LinkedList<User*> &users,QString username);
 };
 
 #endif // ADMIN_H
