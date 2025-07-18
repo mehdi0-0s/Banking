@@ -23,6 +23,10 @@ public:
 
     bool editUser(LinkedList<User*> &users,User* user,QString name, QString lastName,  QString nationalCode,
                       QString username, QString password, int age);
+
+    void viewAllUsers(LinkedList<User*> &users);
+
+    void viewAllAccounts(LinkedList<User*> &users);
 };
 
 #endif // ADMIN_H

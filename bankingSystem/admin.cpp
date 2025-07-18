@@ -52,3 +52,26 @@ bool Admin::editUser(LinkedList<User*> &users,User* userToChange,QString name, Q
     userToChange->setAge(age);
     return true;
 }
+
+
+void Admin::viewAllUsers(LinkedList<User*> &users)
+{
+    Node<User*> *current = users.getHead();
+    while(current != nullptr)
+    {
+        //...
+        current = current->next;
+    }
+}
+
+void Admin::viewAllAccounts(LinkedList<User*> &users)
+{
+
+    Node<User*> *current = users.getHead();
+    while(current != nullptr)
+    {
+        //...
+        current = current->next;
+    }
+
+}
