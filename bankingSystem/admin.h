@@ -20,6 +20,9 @@ public:
 
 
     bool removeCustomer(LinkedList<User*> &users,QString username);
+
+    bool editUser(LinkedList<User*> &users,User* user,QString name, QString lastName,  QString nationalCode,
+                      QString username, QString password, int age);
 };
 
 #endif // ADMIN_H

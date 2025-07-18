@@ -26,3 +26,29 @@ bool Admin::removeCustomer(LinkedList<User*> &users,QString username)
 
     return users.deleteNode(&delUser);
 }
+
+
+bool Admin::editUser(LinkedList<User*> &users,User* userToChange,QString name, QString lastName,  QString nationalCode,
+                         QString username, QString password, int age)
+{
+    if(userToChange ==nullptr){return false;}
+
+    Node<User*>* current = users.getHead();
+    while (current != nullptr)
+    {
+        if (current->data->getUsername() == username && current->data != userToChange)
+        {
+            return false;
+        }
+        current = current->next;
+    }
+
+
+    userToChange->setName(name);
+    userToChange->setLastName(lastName);
+    userToChange->setNationalCode(nationalCode);
+    userToChange->setUsername(username);
+    userToChange->setPassword(password);
+    userToChange->setAge(age);
+    return true;
+}
