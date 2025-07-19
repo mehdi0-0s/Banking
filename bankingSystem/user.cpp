@@ -66,3 +66,5 @@ User* User::logIn(LinkedList<User*>& usersList, const QString& username, const Q
     return nullptr;
 }
 
+
+User::~User(){}

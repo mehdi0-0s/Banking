@@ -40,6 +40,8 @@ public:
                         QString nationalCode,  QString username,QString password, int age);
 
     static User* logIn(LinkedList<User*>& usersList, const QString& username, const QString& password);
+
+    virtual ~User();
 };
 
 #endif // USER_H

@@ -1,7 +1,7 @@
 #include "account.h"
-
+#include<QRandomGenerator>
 Account::Account(QString cardNumber,QString accountNumber,QString shebaNumber,
-                 QString cvv2, double balance,QDate expDate,QString &pin,  QString pin2)
+                 QString cvv2, double balance,QDate expDate,QString pin,  QString pin2)
         :cardNumber(cardNumber), accountNumber(accountNumber), shebaNumber(shebaNumber),
     cvv2(cvv2), balance(balance), expirationDate(expDate), pin(pin), pin2(pin2)
 {
@@ -22,6 +22,17 @@ QDate Account::getExpirationDate()
 {
     return expirationDate;
 }
+
+QString Account::getPin2()
+{
+    return this->pin2;
+}
+
+QString Account::getDynamicPin()
+{
+    return dynamicPin;
+}
+
 
 void Account::setBalance(double newBalance)
 {
@@ -46,4 +57,13 @@ void Account::setDynamicPin(QString newDynamicPin)
 bool Account::operator==(const Account& other) const
 {
     return this->cardNumber == other.cardNumber;
+}
+
+
+QString Account::generateAndSetDynamicPin()
+{
+    int randomPin = QRandomGenerator::global()->bounded(100000, 1000000);
+    this->dynamicPin = QString::number(randomPin);
+    return this->dynamicPin;
+
 }
