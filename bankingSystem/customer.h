@@ -3,8 +3,7 @@
 
 #include "user.h"
 #include "LinkedList.h"
-
-class Account;
+#include "account.h"
 
 class Customer :public User
 {
@@ -13,6 +12,11 @@ private:
 public:
     Customer(QString name, QString lastName,  QString nationalCode,QString username, QString password, int age);
     LinkedList<Account*>& getAccounts();
+
+    bool changeAccountPin(QString cardNumber,QString newPin);
+
+    bool changeAccountPin2(QString cardNumber,QString newPin2);
+
 };
 
 #endif // CUSTOMER_H
