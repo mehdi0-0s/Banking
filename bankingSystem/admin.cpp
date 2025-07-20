@@ -79,7 +79,20 @@ void Admin::viewAllAccounts(LinkedList<User*> &users)
 
 }
 
+void Admin::viewAllAdmins(LinkedList<User*>& users)
+{
+    Node<User*>* current = users.getHead();
+    while (current != nullptr)
+    {
+        Admin* admin = dynamic_cast<Admin*>(current->data);
 
+        if (admin != nullptr)
+        {
+            //...
+        }
+        current = current->next;
+    }
+}
 
 Account* Admin::addAccountToCustomer(Customer* customer, int accountType, double initialBalance)
 {

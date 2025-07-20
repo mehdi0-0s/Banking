@@ -28,6 +28,8 @@ public:
 
     void viewAllAccounts(LinkedList<User*> &users);
 
+    void viewAllAdmins(LinkedList<User*>& users);
+
     Account* addAccountToCustomer(Customer* customer, int accountType, double initialBalance);
 };
 
