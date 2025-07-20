@@ -14,6 +14,7 @@ SOURCES += \
     checkingaccount.cpp \
     currentaccount.cpp \
     customer.cpp \
+    logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
     savingaccount.cpp \
@@ -27,11 +28,13 @@ HEADERS += \
     checkingaccount.h \
     currentaccount.h \
     customer.h \
+    logindialog.h \
     mainwindow.h \
     savingaccount.h \
     user.h
 
 FORMS += \
+    logindialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
