@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AdminDashboard.cpp \
+    CustomerDashboard.cpp \
     account.cpp \
     admin.cpp \
     checkingaccount.cpp \
@@ -16,11 +18,12 @@ SOURCES += \
     customer.cpp \
     logindialog.cpp \
     main.cpp \
-    mainwindow.cpp \
     savingaccount.cpp \
     user.cpp
 
 HEADERS += \
+    AdminDashboard.h \
+    CustomerDashboard.h \
     LinkedList.h \
     Node.h \
     account.h \
@@ -29,13 +32,13 @@ HEADERS += \
     currentaccount.h \
     customer.h \
     logindialog.h \
-    mainwindow.h \
     savingaccount.h \
     user.h
 
 FORMS += \
-    logindialog.ui \
-    mainwindow.ui
+    AdminDashboard.ui \
+    CustomerDashboard.ui \
+    logindialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
