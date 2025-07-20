@@ -27,6 +27,8 @@ public:
     void viewAllUsers(LinkedList<User*> &users);
 
     void viewAllAccounts(LinkedList<User*> &users);
+
+    Account* addAccountToCustomer(Customer* customer, int accountType, double initialBalance);
 };
 
 #endif // ADMIN_H

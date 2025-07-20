@@ -88,6 +88,17 @@ public:
     }
 
     Node<T>* getHead(){return head;}
+
+    int size()
+    {
+        int count = 0;
+        Node<T>* current = head;
+        while (current != nullptr) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
 };
 
 #endif // LINKEDLIST_H

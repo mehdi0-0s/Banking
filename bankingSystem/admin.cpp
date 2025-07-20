@@ -1,5 +1,8 @@
 #include "admin.h"
-
+#include "SavingAccount.h"
+#include "CurrentAccount.h"
+#include "CheckingAccount.h"
+#include "QRandomGenerator"
 Admin::Admin(QString name, QString lastName,  QString nationalCode,QString username, QString password, int age)
         :User(name,lastName,nationalCode,username,password,age)
 {}
@@ -74,4 +77,42 @@ void Admin::viewAllAccounts(LinkedList<User*> &users)
         current = current->next;
     }
 
+}
+
+
+
+Account* Admin::addAccountToCustomer(Customer* customer, int accountType, double initialBalance)
+{
+    if (customer == nullptr) return nullptr;
+
+    if (customer->getAccounts().size() >= 5) {
+        qDebug() << "Error: Customer already has the maximum of 5 accounts.";
+        return nullptr;
+    }
+
+    QString cardNumber = QString::number(QRandomGenerator::global()->bounded(1000000000000000, 9999999999999999));
+    QString accountNumber = QString::number(QRandomGenerator::global()->bounded(10000000, 99999999));
+    QString shabaNumber = "IR" + QString::number(QRandomGenerator::global()->bounded(1000000000, 9999999999));
+    QString cvv2 = QString::number(QRandomGenerator::global()->bounded(100, 1000));
+    QDate expDate = QDate::currentDate().addYears(4);
+    QString pin = "1111";
+    QString pin2 = "12345";
+
+    Account* newAccount = nullptr;
+    switch (accountType) {
+    case 1:
+        newAccount = new SavingAccount(cardNumber, accountNumber, shabaNumber, cvv2, initialBalance, expDate, pin, pin2);
+        break;
+    case 2:
+        newAccount = new CurrentAccount(cardNumber, accountNumber, shabaNumber, cvv2, initialBalance, expDate, pin, pin2);
+        break;
+    case 3:
+        newAccount = new CheckingAccount(cardNumber, accountNumber, shabaNumber, cvv2, initialBalance, expDate, pin, pin2);
+        break;
+    default:
+        return nullptr;
+    }
+
+    customer->getAccounts().insertAtEnd(newAccount);
+    return newAccount;
 }
