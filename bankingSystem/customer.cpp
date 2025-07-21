@@ -172,3 +172,21 @@ TransferResult Customer::cardTransfer(LinkedList<User*>& allUsers,QString source
     return TransferResult::Success;
 }
 
+QString Customer::getRecipientName(LinkedList<User*>& allUsers,QString destCardNumber)
+{
+    Node<User*>* currentUserNode = allUsers.getHead();
+    while (currentUserNode != nullptr) {
+        Customer* customer = dynamic_cast<Customer*>(currentUserNode->data);
+        if (customer) {
+            Node<Account*>* currentAccountNode = customer->getAccounts().getHead();
+            while (currentAccountNode != nullptr) {
+                if (currentAccountNode->data->getCardNumber() == destCardNumber) {
+                    return customer->getName() + " " + customer->getLastName();
+                }
+                currentAccountNode = currentAccountNode->next;
+            }
+        }
+        currentUserNode = currentUserNode->next;
+    }
+    return "Not Found";
+}

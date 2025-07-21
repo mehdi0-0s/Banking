@@ -16,11 +16,37 @@ int main(int argc, char *argv[])
     LinkedList<User*> allUsers;
 
     Admin *admin1 = new Admin("ali","slh","123","ali84","1234",20);
-    Customer *customer1 = new Customer("mad","pp","888","md23d","0000",77);
+    Customer *customer1 = new Customer("a","pp","888","aaa","0000",77);
+    Customer *customer2 = new Customer("b","pp","888","bbb","1111",77);
     allUsers.insertAtEnd(admin1);
     allUsers.insertAtEnd(customer1);
+    allUsers.insertAtEnd(customer2);
+
+    //add account for test
+    admin1->addAccountToCustomer(customer1,1,100000);
+    admin1->addAccountToCustomer(customer2,1,500000);
+    admin1->addAccountToCustomer(customer1,2,900000);
+    admin1->addAccountToCustomer(customer2,2,400000);
 
 
+    //...
+    qDebug() << "--- DEBUG: ALL ACCOUNTS FOR TESTING ---";
+    Node<User*>* userNode = allUsers.getHead();
+    while(userNode != nullptr)
+    {
+        Customer* customer = dynamic_cast<Customer*>(userNode->data);
+        if (customer) {
+            Node<Account*>* accountNode = customer->getAccounts().getHead();
+            while(accountNode != nullptr)
+            {
+                qDebug() << "Owner:" << customer->getUsername()
+                << "| Card Number:" << accountNode->data->getCardNumber();
+                accountNode = accountNode->next;
+            }
+        }
+        userNode = userNode->next;
+    }
+    qDebug() << "-----------------------------------------";
 
 
     LoginDialog loginDialog(&allUsers);
@@ -38,7 +64,8 @@ int main(int argc, char *argv[])
 
         else if(dynamic_cast<Customer*>(user) != nullptr)
         {
-            CustomerDashboard *customerWindow = new CustomerDashboard();
+            Customer* customer = dynamic_cast<Customer*>(user);
+            CustomerDashboard *customerWindow = new CustomerDashboard(&allUsers,customer);
             customerWindow->show();
 
         }

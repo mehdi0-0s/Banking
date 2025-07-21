@@ -13,12 +13,14 @@ SOURCES += \
     CustomerDashboard.cpp \
     account.cpp \
     admin.cpp \
+    changepindialog.cpp \
     checkingaccount.cpp \
     currentaccount.cpp \
     customer.cpp \
     logindialog.cpp \
     main.cpp \
     savingaccount.cpp \
+    transferdialog.cpp \
     user.cpp
 
 HEADERS += \
@@ -28,17 +30,21 @@ HEADERS += \
     Node.h \
     account.h \
     admin.h \
+    changepindialog.h \
     checkingaccount.h \
     currentaccount.h \
     customer.h \
     logindialog.h \
     savingaccount.h \
+    transferdialog.h \
     user.h
 
 FORMS += \
     AdminDashboard.ui \
     CustomerDashboard.ui \
-    logindialog.ui
+    changepindialog.ui \
+    logindialog.ui \
+    transferdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
