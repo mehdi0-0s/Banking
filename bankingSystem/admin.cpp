@@ -109,7 +109,7 @@ Account* Admin::addAccountToCustomer(Customer* customer, int accountType, double
     QString cvv2 = QString::number(QRandomGenerator::global()->bounded(100, 1000));
     QDate expDate = QDate::currentDate().addYears(4);
     QString pin = "1111";
-    QString pin2 = "12345";
+    QString pin2 = QString::number(QRandomGenerator::global()->bounded(10000, 99999));
 
     Account* newAccount = nullptr;
     switch (accountType) {

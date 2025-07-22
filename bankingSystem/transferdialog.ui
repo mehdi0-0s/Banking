@@ -86,7 +86,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>280</y>
+     <y>270</y>
      <width>63</width>
      <height>20</height>
     </rect>
@@ -109,13 +109,13 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>340</y>
+     <y>330</y>
      <width>63</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>pin</string>
+    <string>pin2</string>
    </property>
   </widget>
   <widget class="QPushButton" name="verify_pushButton">
@@ -131,7 +131,7 @@
     <string>verify</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="withdraw_pushButton">
+  <widget class="QPushButton" name="transfer_pushButton">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -141,7 +141,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>withdraw</string>
+    <string>transfer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="dynamicPin_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>340</y>
+     <width>141</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>get dynamic pin</string>
    </property>
   </widget>
  </widget>

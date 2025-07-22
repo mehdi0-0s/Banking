@@ -158,7 +158,6 @@ TransferResult Customer::cardTransfer(LinkedList<User*>& allUsers,QString source
 
     if (sourceAccount->getBalance() < (amount + fee))
     {
-        qDebug() << "Error: Insufficient balance to cover amount + fee.";
         return TransferResult::Error_InsufficientBalance;
     }
 
@@ -189,4 +188,17 @@ QString Customer::getRecipientName(LinkedList<User*>& allUsers,QString destCardN
         currentUserNode = currentUserNode->next;
     }
     return "Not Found";
+}
+
+
+Account* Customer::findAccountByCardNumber( QString cardNumber)
+{
+    Node<Account*>* current = this->accounts.getHead();
+    while (current != nullptr) {
+        if (current->data->getCardNumber() == cardNumber) {
+            return current->data;
+        }
+        current = current->next;
+    }
+    return nullptr;
 }

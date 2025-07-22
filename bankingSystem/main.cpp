@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
             while(accountNode != nullptr)
             {
                 qDebug() << "Owner:" << customer->getUsername()
-                << "| Card Number:" << accountNode->data->getCardNumber();
+                         << "| Card Number:" << accountNode->data->getCardNumber()<<"| Pin2:"<<accountNode->data->getPin2();
                 accountNode = accountNode->next;
             }
         }
@@ -49,27 +49,35 @@ int main(int argc, char *argv[])
     qDebug() << "-----------------------------------------";
 
 
-    LoginDialog loginDialog(&allUsers);
-    loginDialog.show();
 
-    if(loginDialog.exec() == QDialog::Accepted)
+    while(true)
     {
-        User *user = loginDialog.getLogUser();
-        if(dynamic_cast<Admin*>(user) != nullptr)
-        {
-            AdminDashboard *adminWindow = new AdminDashboard();
-            adminWindow->show();
+        LoginDialog loginDialog(&allUsers);
 
+        if(loginDialog.exec() == QDialog::Accepted)
+        {
+            User *user = loginDialog.getLogUser();
+            if(dynamic_cast<Admin*>(user) != nullptr)
+            {
+                AdminDashboard *adminWindow = new AdminDashboard();
+                adminWindow->show();
+                a.exec();
+            }
+
+            else if(dynamic_cast<Customer*>(user) != nullptr)
+            {
+                Customer* customer = dynamic_cast<Customer*>(user);
+                CustomerDashboard *customerWindow = new CustomerDashboard(&allUsers,customer);
+                customerWindow->show();
+                a.exec();
+            }
         }
-
-        else if(dynamic_cast<Customer*>(user) != nullptr)
+        else
         {
-            Customer* customer = dynamic_cast<Customer*>(user);
-            CustomerDashboard *customerWindow = new CustomerDashboard(&allUsers,customer);
-            customerWindow->show();
-
+            break;
         }
     }
+
 
     return a.exec();
 }

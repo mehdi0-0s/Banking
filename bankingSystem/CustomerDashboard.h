@@ -25,6 +25,8 @@ private slots:
 
     void on_transfer_pushButton_clicked();
 
+    void on_logout_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Customer *logCustomer;

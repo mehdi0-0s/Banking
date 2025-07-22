@@ -39,6 +39,8 @@ public:
     TransferResult cardTransfer(LinkedList<User*>& allUsers,QString sourceCardNumber,QString destCardNumber,double amount,QString pin2,bool useDynamicPin);
 
     static QString getRecipientName(LinkedList<User*>& allUsers,QString destCardNumber);
+
+    Account* findAccountByCardNumber(QString cardNumber);
 };
 
 #endif // CUSTOMER_H

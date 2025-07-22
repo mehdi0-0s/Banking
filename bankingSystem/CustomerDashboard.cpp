@@ -70,7 +70,7 @@ void CustomerDashboard::updateAccountsDisplay()
 
 void CustomerDashboard::on_transfer_pushButton_clicked()
 {
-    transferDialog transferWindow(allUsers,this);
+    transferDialog transferWindow(allUsers,logCustomer,this);
     if (transferWindow.exec() == QDialog::Accepted)
     {
         QString sourceCard = transferWindow.getSourceCard();
@@ -91,16 +91,40 @@ void CustomerDashboard::on_transfer_pushButton_clicked()
             QMessageBox::information(this, "موفقیت", "تراکنش با موفقیت انجام شد.");
             this->updateAccountsDisplay();
             break;
-        case TransferResult::Error_InsufficientBalance:
-            QMessageBox::warning(this, "خطا", "موجودی کافی نیست.");
+        case TransferResult::Error_SourceAccountNotFound:
+            QMessageBox::warning(this, "خطا", "شماره کارت مبدأ در حساب‌های شما یافت نشد.");
             break;
+
+        case TransferResult::Error_DestAccountNotFound:
+            QMessageBox::warning(this, "خطا", "شماره کارت مقصد نامعتبر است.");
+            break;
+
         case TransferResult::Error_CardExpired:
             QMessageBox::warning(this, "خطا", "کارت مبدأ منقضی شده است.");
             break;
-        default:
-            QMessageBox::critical(this, "خطای نامشخص", "یک خطای پیش‌بینی نشده رخ داد.");
+
+        case TransferResult::Error_TransactionLimitExceeded:
+            QMessageBox::warning(this, "خطا", "مبلغ تراکنش از سقف ۳,۰۰۰,۰۰۰ تومان بیشتر است.");
+            break;
+
+        case TransferResult::Error_DailyLimitExceeded:
+            QMessageBox::warning(this, "خطا", "از سقف انتقال روزانه ۶,۰۰۰,۰۰۰ تومان عبور کرده‌اید.");
+            break;
+
+        case TransferResult::Error_InsufficientBalance:
+            QMessageBox::warning(this, "خطا", "موجودی حساب کافی نیست.");
+            break;
+
+        case TransferResult::Error_InvalidPin:
+            QMessageBox::warning(this, "خطا", "رمز دوم وارد شده نامعتبر است.");
             break;
         }
     }
+}
+
+
+void CustomerDashboard::on_logout_pushButton_clicked()
+{
+    this->close();
 }
 
