@@ -42,7 +42,12 @@ void AdminDashboard::on_addCustomer_pushButton_clicked()
         QString username = addDialog.getUsername();
         QString password = addDialog.getPassword();
         int age = addDialog.getAge();
-
+        if (name.isEmpty() || lastName.isEmpty() || nationalCode.isEmpty() ||
+            username.isEmpty() || password.isEmpty())
+        {
+            QMessageBox::warning(this, "خطای ورودی", "تمام فیلدها باید پر شوند.");
+            return;
+        }
         Customer* newCustomer = this->logAdmin->createCustomer(*this->allUsers, name, lastName,
                                                                     nationalCode, username, password, age);
 
