@@ -14,6 +14,7 @@ AdminDashboard::AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWid
     this->logAdmin = logAdmin;
 
     this->updateCustomersDisplay();
+    ui->admins_listWidget->addItems(this->logAdmin->viewAllAdmins(*this->allUsers));
 }
 
 AdminDashboard::~AdminDashboard()
@@ -25,19 +26,8 @@ void AdminDashboard::updateCustomersDisplay()
 {
     ui->customers_listWidget->clear();
 
-    Node<User*>* current = this->allUsers->getHead();
-    while (current != nullptr)
-    {
-        Customer* customer = dynamic_cast<Customer*>(current->data);
-        if (customer)
-        {
-            QString customerInfo = QString("Username: %1 | Name: %2")
-            .arg(customer->getUsername())
-            .arg(customer->getName() + " " + customer->getLastName());
-            ui->customers_listWidget->addItem(customerInfo);
-        }
-        current = current->next;
-    }
+    QList<QString> customersData = this->logAdmin->viewAllCustomers(*this->allUsers);
+    ui->customers_listWidget->addItems(customersData);
     this->updateAllAccountsDisplay();
 }
 
@@ -140,27 +130,9 @@ void AdminDashboard::on_editCustomer_pushButton_clicked()
 void AdminDashboard::updateAllAccountsDisplay()
 {
     ui->allAccounts_listWidget->clear();
+    QList<QString> accountsData = this->logAdmin->viewAllAccounts(*this->allUsers);
+    ui->allAccounts_listWidget->addItems(accountsData);
 
-    Node<User*>* currentUserNode = this->allUsers->getHead();
-    while (currentUserNode != nullptr)
-    {
-        Customer* customer = dynamic_cast<Customer*>(currentUserNode->data);
-        if (customer != nullptr)
-        {
-            LinkedList<Account*>& accounts = customer->getAccounts();
-            Node<Account*>* currentAccountNode = accounts.getHead();
-            while (currentAccountNode != nullptr)
-            {
-                QString accountInfo = QString("Owner: %1 | Card: %2 | Balance: %3")
-                .arg(customer->getUsername())
-                .arg(currentAccountNode->data->getCardNumber())
-                .arg(currentAccountNode->data->getBalance());
-                ui->allAccounts_listWidget->addItem(accountInfo);
-                currentAccountNode = currentAccountNode->next;
-            }
-        }
-        currentUserNode = currentUserNode->next;
-    }
 }
 
 
@@ -191,7 +163,7 @@ void AdminDashboard::on_addAccount_pushButton_clicked()
             Account* newAccount = this->logAdmin->addAccountToCustomer(targetCustomer,accountType,initialBalance);
             if (newAccount != nullptr) {
                 QMessageBox::information(this, "موفقیت", "حساب جدید با موفقیت ایجاد شد.");
-                this->updateAllAccountsDisplay();
+                this->updateCustomersDisplay();
             } else {
                 QMessageBox::warning(this, "خطا", "ایجاد حساب ناموفق بود (احتمالاً سقف ۵ حساب پر شده است).");
             }
@@ -212,3 +184,6 @@ User* AdminDashboard::findUserByUsername(QString username)
     }
     return nullptr;
 }
+
+
+

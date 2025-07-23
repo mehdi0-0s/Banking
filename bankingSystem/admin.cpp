@@ -57,41 +57,70 @@ bool Admin::editUser(LinkedList<User*> &users,User* userToChange,QString name, Q
 }
 
 
-void Admin::viewAllUsers(LinkedList<User*> &users)
+QList<QString> Admin::viewAllCustomers(LinkedList<User*> &users)
 {
-    Node<User*> *current = users.getHead();
-    while(current != nullptr)
-    {
-        //...
+    QList<QString> customerDisplayList;
+    Node<User*>* current = users.getHead();
+    while (current != nullptr) {
+        Customer* customer = dynamic_cast<Customer*>(current->data);
+        if (customer) {
+            QString info = QString("Username: %1 | Name: %2 %3 | National Code:%4 | Age: %5 | Number of accounts: %6")
+                            .arg(customer->getUsername() , customer->getName() , customer->getLastName()
+                                    ,customer->getNationalCode(),QString::number(customer->getAge())
+                                    ,QString::number(customer->getAccounts().size()));
+            customerDisplayList.append(info);
+        }
         current = current->next;
     }
+    return customerDisplayList;
 }
 
-void Admin::viewAllAccounts(LinkedList<User*> &users)
+QList<QString> Admin::viewAllAccounts(LinkedList<User*> &users)
 {
+    QList<QString> accountDisplayList;
+    Node<User*>* currentUserNode = users.getHead();
 
-    Node<User*> *current = users.getHead();
-    while(current != nullptr)
+    while (currentUserNode != nullptr)
     {
-        //...
-        current = current->next;
+        Customer* customer = dynamic_cast<Customer*>(currentUserNode->data);
+        if (customer)
+        {
+            LinkedList<Account*>& accounts = customer->getAccounts();
+            Node<Account*>* currentAccountNode = accounts.getHead();
+            while (currentAccountNode != nullptr)
+            {
+                QString accountInfo = QString("Owner: %1 | Type: %2 | Card: %3 | Balance: %4 | Exp: %5")
+                    .arg(customer->getUsername())
+                    .arg(currentAccountNode->data->getAccountType())
+                    .arg(currentAccountNode->data->getCardNumber())
+                    .arg(currentAccountNode->data->getBalance())
+                    .arg(currentAccountNode->data->getExpirationDate().toString("yyyy/MM"));
+                accountDisplayList.append(accountInfo);
+                currentAccountNode = currentAccountNode->next;
+            }
+        }
+        currentUserNode = currentUserNode->next;
     }
+    return accountDisplayList;
 
 }
 
-void Admin::viewAllAdmins(LinkedList<User*>& users)
+QList<QString> Admin::viewAllAdmins(LinkedList<User*>& users)
 {
+    QList<QString> adminDisplayList;
     Node<User*>* current = users.getHead();
     while (current != nullptr)
     {
         Admin* admin = dynamic_cast<Admin*>(current->data);
-
-        if (admin != nullptr)
-        {
-            //...
+        if (admin) {
+            QString adminInfo = QString("Username: %1 | Name: %2 %3 | National Code: %4 | Age: %5")
+                    .arg(admin->getUsername(), admin->getName(), admin->getLastName() ,
+                                admin->getNationalCode(),QString::number(admin->getAge()));
+            adminDisplayList.append(adminInfo);
         }
         current = current->next;
     }
+    return adminDisplayList;
 }
 
 Account* Admin::addAccountToCustomer(Customer* customer, int accountType, double initialBalance)

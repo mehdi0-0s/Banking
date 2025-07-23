@@ -14,3 +14,7 @@ bool CheckingAccount::grantLoan(double amount)
     }
     return false;
 }
+
+QString CheckingAccount::getAccountType() {
+    return "Checking (قرض‌الحسنه)";
+}

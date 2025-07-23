@@ -9,3 +9,8 @@ double SavingAccount::calculateInterest(double interestRate)
 {
     return this->balance * interestRate;
 }
+
+
+QString SavingAccount::getAccountType(){
+    return "Saving (سپرده)";
+}

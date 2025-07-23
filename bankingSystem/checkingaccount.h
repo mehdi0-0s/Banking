@@ -11,6 +11,7 @@ public:
 
     bool grantLoan(double amount);
 
+    QString getAccountType() override;
 };
 
 #endif // CHECKINGACCOUNT_H

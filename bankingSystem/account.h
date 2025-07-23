@@ -34,6 +34,8 @@ public:
     bool operator==(const Account& other) const;
 
     QString generateAndSetDynamicPin();
+
+    virtual QString getAccountType() = 0;
 };
 
 #endif // ACCOUNT_H

@@ -29,6 +29,7 @@ private slots:
 
     void on_addAccount_pushButton_clicked();
 
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;

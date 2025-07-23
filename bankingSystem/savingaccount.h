@@ -10,6 +10,8 @@ public:
                    QString cvv2, double balance,QDate expDate,QString pin,QString pin2);
 
     double calculateInterest(double interestRate = 0.1);
+
+    QString getAccountType()  override;
 };
 
 #endif // SAVINGACCOUNT_H

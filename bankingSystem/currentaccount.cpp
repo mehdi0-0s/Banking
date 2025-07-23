@@ -9,3 +9,8 @@ void CurrentAccount::generateMiniStatement()
 {
 
 }
+
+
+QString CurrentAccount::getAccountType() {
+    return "Current (جاری)";
+}

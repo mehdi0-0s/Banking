@@ -24,11 +24,11 @@ public:
     bool editUser(LinkedList<User*> &users,User* user,QString name, QString lastName,  QString nationalCode,
                       QString username, QString password, int age);
 
-    void viewAllUsers(LinkedList<User*> &users);
+    QList<QString> viewAllCustomers(LinkedList<User*> &users);
 
-    void viewAllAccounts(LinkedList<User*> &users);
+    QList<QString> viewAllAccounts(LinkedList<User*> &users);
 
-    void viewAllAdmins(LinkedList<User*>& users);
+    QList<QString> viewAllAdmins(LinkedList<User*>& users);
 
     Account* addAccountToCustomer(Customer* customer, int accountType, double initialBalance);
 };

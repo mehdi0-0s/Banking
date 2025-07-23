@@ -11,6 +11,8 @@ public:
                     QString cvv2, double balance,QDate expDate,QString pin,QString pin2);
 
      void generateMiniStatement();
+
+     QString getAccountType() override;
 };
 
 #endif // CURRENTACCOUNT_H
