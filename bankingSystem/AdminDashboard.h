@@ -25,6 +25,8 @@ private slots:
 
     void on_deleteCustomer_pushButton_clicked();
 
+    void on_editCustomer_pushButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;

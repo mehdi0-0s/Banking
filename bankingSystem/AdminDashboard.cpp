@@ -1,6 +1,7 @@
 #include "AdminDashboard.h"
 #include "ui_AdminDashboard.h"
 #include "addcustomerdialog.h"
+#include "edituserdialog.h"
 #include <QMessageBox>
 AdminDashboard::AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent)
     : QMainWindow(parent)
@@ -90,5 +91,31 @@ void AdminDashboard::on_deleteCustomer_pushButton_clicked()
         }
     }
 
+}
+
+
+void AdminDashboard::on_editCustomer_pushButton_clicked()
+{
+    if(ui->customers_listWidget->selectedItems().empty()){
+        QMessageBox::warning(this,"خطا" , "لطفا یک کاربر را برای ویرایش انتخاب کنید.");
+        return;
+    }
+    QString usernameToEdit = ui->customers_listWidget->currentItem()->text().split(" | ")[0].split(": ")[1];
+    User tempUserToSearch("", "", "", usernameToEdit, "", 0);
+    Node<User*>* foundNode = this->allUsers->findNode(&tempUserToSearch);
+
+    if(foundNode != nullptr)
+    {
+        User* userToEdit = foundNode->data;
+        editUserDialog editDialog(userToEdit,this);
+        if(editDialog.exec() == QDialog::Accepted)
+        {
+
+        }
+    }
+    else
+    {
+        QMessageBox::critical(this, "خطا", "خطای داخلی: کاربر انتخاب شده در لیست داده‌ها یافت نشد.");
+    }
 }
 

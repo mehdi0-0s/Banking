@@ -18,6 +18,7 @@ SOURCES += \
     checkingaccount.cpp \
     currentaccount.cpp \
     customer.cpp \
+    edituserdialog.cpp \
     logindialog.cpp \
     main.cpp \
     savingaccount.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     checkingaccount.h \
     currentaccount.h \
     customer.h \
+    edituserdialog.h \
     logindialog.h \
     savingaccount.h \
     transferdialog.h \
@@ -46,6 +48,7 @@ FORMS += \
     CustomerDashboard.ui \
     addcustomerdialog.ui \
     changepindialog.ui \
+    edituserdialog.ui \
     logindialog.ui \
     transferdialog.ui
 
