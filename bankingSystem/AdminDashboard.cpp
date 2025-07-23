@@ -2,6 +2,7 @@
 #include "ui_AdminDashboard.h"
 #include "addcustomerdialog.h"
 #include "edituserdialog.h"
+#include "customer.h"
 #include <QMessageBox>
 AdminDashboard::AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent)
     : QMainWindow(parent)
@@ -36,6 +37,7 @@ void AdminDashboard::updateCustomersDisplay()
         }
         current = current->next;
     }
+    this->updateAllAccountsDisplay();
 }
 
 void AdminDashboard::on_addCustomer_pushButton_clicked()
@@ -132,6 +134,32 @@ void AdminDashboard::on_editCustomer_pushButton_clicked()
     else
     {
         QMessageBox::critical(this, "خطا", "خطای داخلی: کاربر انتخاب شده در لیست داده‌ها یافت نشد.");
+    }
+}
+
+void AdminDashboard::updateAllAccountsDisplay()
+{
+    ui->allAccounts_listWidget->clear();
+
+    Node<User*>* currentUserNode = this->allUsers->getHead();
+    while (currentUserNode != nullptr)
+    {
+        Customer* customer = dynamic_cast<Customer*>(currentUserNode->data);
+        if (customer != nullptr)
+        {
+            LinkedList<Account*>& accounts = customer->getAccounts();
+            Node<Account*>* currentAccountNode = accounts.getHead();
+            while (currentAccountNode != nullptr)
+            {
+                QString accountInfo = QString("Owner: %1 | Card: %2 | Balance: %3")
+                .arg(customer->getUsername())
+                .arg(currentAccountNode->data->getCardNumber())
+                .arg(currentAccountNode->data->getBalance());
+                ui->allAccounts_listWidget->addItem(accountInfo);
+                currentAccountNode = currentAccountNode->next;
+            }
+        }
+        currentUserNode = currentUserNode->next;
     }
 }
 

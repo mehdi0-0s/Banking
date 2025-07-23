@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -33,7 +33,7 @@
      <widget class="QListWidget" name="customers_listWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>40</x>
         <y>50</y>
         <width>521</width>
         <height>192</height>
@@ -82,8 +82,31 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>مدیریت حساب ها</string>
      </attribute>
+     <widget class="QListWidget" name="allAccounts_listWidget">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>511</width>
+        <height>192</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addAccount_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>280</y>
+        <width>151</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>افزودن حساب</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

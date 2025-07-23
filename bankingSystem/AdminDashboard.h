@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include "user.h"
 #include "admin.h"
-#include "customer.h"
 #include <LinkedList.h>
 
 namespace Ui {
@@ -19,6 +18,7 @@ public:
     explicit AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent = nullptr);
     ~AdminDashboard();
     void updateCustomersDisplay();
+    void updateAllAccountsDisplay();
 
 private slots:
     void on_addCustomer_pushButton_clicked();
