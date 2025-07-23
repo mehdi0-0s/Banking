@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
             User *user = loginDialog.getLogUser();
             if(dynamic_cast<Admin*>(user) != nullptr)
             {
-                AdminDashboard *adminWindow = new AdminDashboard();
+                Admin* admin=dynamic_cast<Admin*>(user);
+                AdminDashboard *adminWindow = new AdminDashboard(&allUsers,admin);
                 adminWindow->show();
                 a.exec();
             }

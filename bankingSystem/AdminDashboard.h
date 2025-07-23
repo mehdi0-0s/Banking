@@ -2,6 +2,10 @@
 #define ADMINDASHBOARD_H
 
 #include <QMainWindow>
+#include "user.h"
+#include "admin.h"
+#include "customer.h"
+#include <LinkedList.h>
 
 namespace Ui {
 class AdminDashboard;
@@ -12,11 +16,14 @@ class AdminDashboard : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit AdminDashboard(QWidget *parent = nullptr);
+    explicit AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent = nullptr);
     ~AdminDashboard();
+    void updateCustomersDisplay();
 
 private:
     Ui::AdminDashboard *ui;
+    LinkedList<User*> *allUsers;
+    Admin * logAdmin;
 };
 
 #endif // ADMINDASHBOARD_H
