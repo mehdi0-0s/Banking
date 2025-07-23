@@ -62,3 +62,33 @@ void AdminDashboard::on_addCustomer_pushButton_clicked()
 
 }
 
+
+void AdminDashboard::on_deleteCustomer_pushButton_clicked()
+{
+    if(ui->customers_listWidget->selectedItems().empty()){
+        QMessageBox::warning(this,"خطا" , "لطفا یک کاربر را برای حذف انتخاب کنید.");
+        return;
+    }
+
+    QMessageBox::StandardButton confirmation;
+    confirmation = QMessageBox::question(this, "تأیید حذف", "آیا از حذف این مشتری اطمینان دارید؟ این عمل قابل بازگشت نیست.",
+                                         QMessageBox::Yes | QMessageBox::No);
+
+    if(confirmation == QMessageBox::Yes)
+    {
+        QString usernameToDelete = ui->customers_listWidget->currentItem()->text().split(" | ")[0].split(": ")[1];
+
+        bool res = this->logAdmin->removeCustomer(*allUsers,usernameToDelete);
+        if(res == true)
+        {
+            QMessageBox::information(this, "موفقیت", "مشتری با موفقیت حذف شد.");
+            this->updateCustomersDisplay();
+        }
+        else
+        {
+            QMessageBox::critical(this, "خطا", "خطایی در حذف مشتری رخ داد.");
+        }
+    }
+
+}
+

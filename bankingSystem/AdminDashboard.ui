@@ -69,7 +69,7 @@
      <widget class="QPushButton" name="deleteCustomer_pushButton">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>210</x>
         <y>280</y>
         <width>83</width>
         <height>29</height>
