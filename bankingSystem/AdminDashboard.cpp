@@ -1,6 +1,7 @@
 #include "AdminDashboard.h"
 #include "ui_AdminDashboard.h"
-
+#include "addcustomerdialog.h"
+#include <QMessageBox>
 AdminDashboard::AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::AdminDashboard)
@@ -35,3 +36,29 @@ void AdminDashboard::updateCustomersDisplay()
         current = current->next;
     }
 }
+
+void AdminDashboard::on_addCustomer_pushButton_clicked()
+{
+    AddCustomerDialog addDialog(this);
+    if (addDialog.exec() == QDialog::Accepted)
+    {
+        QString name = addDialog.getName();
+        QString lastName = addDialog.getLastName();
+        QString nationalCode = addDialog.getNationalCode();
+        QString username = addDialog.getUsername();
+        QString password = addDialog.getPassword();
+        int age = addDialog.getAge();
+
+        Customer* newCustomer = this->logAdmin->createCustomer(*this->allUsers, name, lastName,
+                                                                    nationalCode, username, password, age);
+
+        if (newCustomer != nullptr) {
+            QMessageBox::information(this, "موفقیت", "مشتری جدید با موفقیت اضافه شد.");
+            this->updateCustomersDisplay();
+        } else {
+            QMessageBox::warning(this, "خطا", "نام کاربری تکراری است یا خطای دیگری رخ داد.");
+        }
+    }
+
+}
+

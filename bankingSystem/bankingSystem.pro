@@ -12,6 +12,7 @@ SOURCES += \
     AdminDashboard.cpp \
     CustomerDashboard.cpp \
     account.cpp \
+    addcustomerdialog.cpp \
     admin.cpp \
     changepindialog.cpp \
     checkingaccount.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     LinkedList.h \
     Node.h \
     account.h \
+    addcustomerdialog.h \
     admin.h \
     changepindialog.h \
     checkingaccount.h \
@@ -42,6 +44,7 @@ HEADERS += \
 FORMS += \
     AdminDashboard.ui \
     CustomerDashboard.ui \
+    addcustomerdialog.ui \
     changepindialog.ui \
     logindialog.ui \
     transferdialog.ui

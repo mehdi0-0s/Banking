@@ -20,6 +20,9 @@ public:
     ~AdminDashboard();
     void updateCustomersDisplay();
 
+private slots:
+    void on_addCustomer_pushButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;
