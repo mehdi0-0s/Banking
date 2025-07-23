@@ -3,6 +3,7 @@
 #include "addcustomerdialog.h"
 #include "edituserdialog.h"
 #include "customer.h"
+#include "addaccountdialog.h"
 #include <QMessageBox>
 AdminDashboard::AdminDashboard(LinkedList<User*> *allUsers,Admin * logAdmin,QWidget *parent)
     : QMainWindow(parent)
@@ -103,12 +104,11 @@ void AdminDashboard::on_editCustomer_pushButton_clicked()
         return;
     }
     QString usernameToEdit = ui->customers_listWidget->currentItem()->text().split(" | ")[0].split(": ")[1];
-    User tempUserToSearch("", "", "", usernameToEdit, "", 0);
-    Node<User*>* foundNode = this->allUsers->findNode(&tempUserToSearch);
+    User* userToEdit = findUserByUsername(usernameToEdit);
 
-    if(foundNode != nullptr)
+    if(userToEdit != nullptr)
     {
-        User* userToEdit = foundNode->data;
+
         editUserDialog editDialog(userToEdit,this);
         if(editDialog.exec() == QDialog::Accepted)
         {
@@ -163,3 +163,52 @@ void AdminDashboard::updateAllAccountsDisplay()
     }
 }
 
+
+void AdminDashboard::on_addAccount_pushButton_clicked()
+{
+    if (ui->customers_listWidget->selectedItems().empty()) {
+        QMessageBox::warning(this, "خطا", "لطفاً ابتدا مشتری مورد نظر را از لیست انتخاب کنید.");
+        return;
+    }
+
+    QString username = ui->customers_listWidget->currentItem()->text().split(" | ")[0].split(": ")[1];
+    User* user = findUserByUsername(username);
+    Customer* targetCustomer = dynamic_cast<Customer*>(user);
+
+    if (targetCustomer == nullptr)
+    {
+        QMessageBox::critical(this, "خطا", "کاربر انتخاب شده مشتری نیست یا یافت نشد.");
+        return;
+    }
+    else
+    {
+        AddAccountDialog addAccountDialog(this);
+        if(addAccountDialog.exec() == QDialog::Accepted)
+        {
+            int accountType = addAccountDialog.getAccountTypeIndex() + 1;
+            double initialBalance = addAccountDialog.getBalance();
+
+            Account* newAccount = this->logAdmin->addAccountToCustomer(targetCustomer,accountType,initialBalance);
+            if (newAccount != nullptr) {
+                QMessageBox::information(this, "موفقیت", "حساب جدید با موفقیت ایجاد شد.");
+                this->updateAllAccountsDisplay();
+            } else {
+                QMessageBox::warning(this, "خطا", "ایجاد حساب ناموفق بود (احتمالاً سقف ۵ حساب پر شده است).");
+            }
+        }
+    }
+
+}
+
+User* AdminDashboard::findUserByUsername(QString username)
+{
+    Node<User*>* current = this->allUsers->getHead();
+    while(current != nullptr)
+    {
+        if(current->data->getUsername() == username) {
+            return current->data;
+        }
+        current = current->next;
+    }
+    return nullptr;
+}

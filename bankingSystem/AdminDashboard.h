@@ -27,10 +27,13 @@ private slots:
 
     void on_editCustomer_pushButton_clicked();
 
+    void on_addAccount_pushButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;
     Admin * logAdmin;
+    User* findUserByUsername(QString username);
 };
 
 #endif // ADMINDASHBOARD_H
