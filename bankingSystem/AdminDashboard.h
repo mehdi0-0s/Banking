@@ -33,6 +33,8 @@ private slots:
 
     void on_allAccounts_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_editMyProfile_pushButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;

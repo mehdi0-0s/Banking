@@ -219,3 +219,29 @@ void AdminDashboard::on_allAccounts_listWidget_itemDoubleClicked(QListWidgetItem
     }
 }
 
+
+void AdminDashboard::on_editMyProfile_pushButton_clicked()
+{
+    editUserDialog editDialog(this->logAdmin, this);
+
+    if (editDialog.exec() == QDialog::Accepted)
+    {
+        QString name = editDialog.getName();
+        QString lastName = editDialog.getLastName();
+        QString nationalCode = editDialog.getNationalCode();
+        QString username = editDialog.getUsername();
+        QString password = editDialog.getPassword();
+        int age = editDialog.getAge();
+
+        bool success = this->logAdmin->editUser(*this->allUsers, this->logAdmin,name,lastName,nationalCode,username,password,age);
+
+        if (success) {
+            QMessageBox::information(this, "موفقیت", "پروفایل شما با موفقیت به‌روز شد.");
+            ui->admins_listWidget->clear();
+            ui->admins_listWidget->addItems(this->logAdmin->viewAllAdmins(*this->allUsers));
+        } else {
+            QMessageBox::warning(this, "خطا", "نام کاربری جدید تکراری است.");
+        }
+    }
+}
+
