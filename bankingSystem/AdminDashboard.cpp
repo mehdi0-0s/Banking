@@ -110,6 +110,22 @@ void AdminDashboard::on_editCustomer_pushButton_clicked()
         editUserDialog editDialog(userToEdit,this);
         if(editDialog.exec() == QDialog::Accepted)
         {
+            QString name = editDialog.getName();
+            QString lastName = editDialog.getLastName();
+            QString nationalCode = editDialog.getNationalCode();
+            QString username = editDialog.getUsername();
+            QString password = editDialog.getPassword();
+            int age = editDialog.getAge();
+
+            bool res = this->logAdmin->editUser(*allUsers,userToEdit,name,lastName,nationalCode,username,password,age);
+            if(res == true)
+            {
+                QMessageBox::information(this, "موفقیت", "اطلاعات مشتری با موفقیت ویرایش شد.");
+                this->updateCustomersDisplay();
+            }
+            else{
+                QMessageBox::warning(this, "خطا", "نام کاربری جدید تکراری است.");
+            }
 
         }
     }
