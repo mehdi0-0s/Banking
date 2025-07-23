@@ -5,6 +5,7 @@
 #include "user.h"
 #include "admin.h"
 #include <LinkedList.h>
+#include <qlistwidget.h>
 
 namespace Ui {
 class AdminDashboard;
@@ -29,6 +30,8 @@ private slots:
 
     void on_addAccount_pushButton_clicked();
 
+
+    void on_allAccounts_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::AdminDashboard *ui;

@@ -34,6 +34,17 @@ QString Account::getDynamicPin()
 }
 
 
+QString Account::getAccountNumber(){
+    return this->accountNumber;
+}
+QString Account::getShebaNumber(){
+    return this->shebaNumber;
+}
+QString Account::getCvv2(){
+    return this->cvv2;
+}
+
+
 void Account::setBalance(double newBalance)
 {
     balance = newBalance;

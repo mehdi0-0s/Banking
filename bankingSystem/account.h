@@ -25,6 +25,9 @@ public:
     QDate getExpirationDate();
     QString getPin2();
     QString getDynamicPin();
+    QString getAccountNumber();
+    QString getShebaNumber();
+    QString getCvv2();
 
     void setBalance(double newBalance);
     void setPin(QString newPin);

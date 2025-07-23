@@ -187,3 +187,35 @@ User* AdminDashboard::findUserByUsername(QString username)
 
 
 
+
+void AdminDashboard::on_allAccounts_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString cardNumber = item->text().split(" | ")[2].split(": ")[1];
+
+    Account* targetAccount = nullptr;
+    Node<User*>* userNode = this->allUsers->getHead();
+    while(userNode != nullptr && targetAccount == nullptr) {
+        Customer* customer = dynamic_cast<Customer*>(userNode->data);
+        if (customer) {
+            Account* found = customer->findAccountByCardNumber(cardNumber);
+            if (found) {
+                targetAccount = found;
+            }
+        }
+        userNode = userNode->next;
+    }
+
+    if (targetAccount) {
+        QString details;
+        details += "Card Number: " + targetAccount->getCardNumber() + "\n";
+        details += "Account Number: " + targetAccount->getAccountNumber() + "\n";
+        details += "Sheba Number: " + targetAccount->getShebaNumber() + "\n";
+        details += "CVV2: " + targetAccount->getCvv2() + "\n";
+        details += "Balance: " + QString::number(targetAccount->getBalance()) + "\n";
+        details += "Expiration Date: " + targetAccount->getExpirationDate().toString("yyyy/MM") + "\n";
+        details += "Account Type: " + targetAccount->getAccountType();
+
+        QMessageBox::information(this, "Account Details", details);
+    }
+}
+
