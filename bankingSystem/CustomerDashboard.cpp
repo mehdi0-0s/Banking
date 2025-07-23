@@ -42,6 +42,7 @@ void CustomerDashboard::on_changePin_pushButton_clicked()
         if(res)
         {
             QMessageBox::information(this,"success","pin changed succesfully");
+            this->updateAccountsDisplay();
         }
         else
         {
@@ -59,9 +60,10 @@ void CustomerDashboard::updateAccountsDisplay()
     Node<Account*>* current = this->logCustomer->getAccounts().getHead();
     while(current != nullptr)
     {
-        QString accountInfo = QString("Card: %1 | Balance: %2")
-        .arg(current->data->getCardNumber())
-            .arg(current->data->getBalance());
+        QString accountInfo = QString("Card: %1 | Balance: %2 | Account type: %3 | Exp: %4 | Pin2: %5 | Account Number: %6 | Sheba Number: %7 | Cvv2: %8")
+        .arg(current->data->getCardNumber() , QString::number(current->data->getBalance()),current->data->getAccountType() ,
+            current->data->getExpirationDate().toString("yyyy/MM"),current->data->getPin2(),current->data->getAccountNumber(),
+            current->data->getShebaNumber(),current->data->getCvv2());
         ui->accounts_listWidget->addItem(accountInfo);
         current = current->next;
     }
@@ -126,5 +128,35 @@ void CustomerDashboard::on_transfer_pushButton_clicked()
 void CustomerDashboard::on_logout_pushButton_clicked()
 {
     this->close();
+}
+
+
+void CustomerDashboard::on_changePin2_pushButton_clicked()
+{
+    if (ui->accounts_listWidget->selectedItems().empty()) {
+        QMessageBox::warning(this, "خطا", "لطفاً ابتدا یک حساب را انتخاب کنید.");
+        return;
+    }
+
+    ChangePinDialog pinDialog(this);
+    if (pinDialog.exec() == QDialog::Accepted)
+    {
+        QString newPin2 = pinDialog.getNewPin();
+        if (newPin2.isEmpty()) {
+            QMessageBox::warning(this, "خطا", "رمز جدید نمی‌تواند خالی باشد.");
+            return;
+        }
+
+        QString cardNumber = ui->accounts_listWidget->currentItem()->text().split(" | ")[0].split(": ")[1];
+
+        bool success = this->logCustomer->changeAccountPin2(cardNumber, newPin2);
+
+        if (success) {
+            QMessageBox::information(this, "موفقیت", "رمز دوم با موفقیت تغییر کرد.");
+            this->updateAccountsDisplay();
+        } else {
+            QMessageBox::critical(this, "خطا", "خطایی در تغییر رمز دوم رخ داد.");
+        }
+    }
 }
 
