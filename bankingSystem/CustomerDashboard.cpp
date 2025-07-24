@@ -12,6 +12,10 @@ CustomerDashboard::CustomerDashboard(LinkedList<User*>*allUsers,Customer *logCus
     this->allUsers = allUsers;
 
     this->updateAccountsDisplay();
+    ui->label_lastName->setText("last name: "+this->logCustomer->getLastName());
+    ui->label_name->setText("name: "+this->logCustomer->getName());
+    ui->label_username->setText("username: "+this->logCustomer->getUsername());
+    ui->label_nationalCode->setText("national code: "+this->logCustomer->getNationalCode());
 }
 
 CustomerDashboard::~CustomerDashboard()
@@ -23,7 +27,7 @@ void CustomerDashboard::on_changePin_pushButton_clicked()
 {
     if(ui->accounts_listWidget->selectedItems().empty())
     {
-        QMessageBox::warning(this,"Error","Please select an account.");
+        QMessageBox::warning(this,"خطا","لطفا ابتدا یک حساب را انتخاب کنید.");
         return;
     }
     ChangePinDialog changePinWindow(this);
@@ -32,7 +36,7 @@ void CustomerDashboard::on_changePin_pushButton_clicked()
         QString newPin = changePinWindow.getNewPin();
 
         if(newPin.isEmpty()){
-            QMessageBox::warning(this,"Error","Please enter new pin.");
+            QMessageBox::warning(this,"خطا","رمز جدید نمی تواند خالی باشد.");
             return;
         }
 
@@ -41,12 +45,12 @@ void CustomerDashboard::on_changePin_pushButton_clicked()
 
         if(res)
         {
-            QMessageBox::information(this,"success","pin changed succesfully");
+            QMessageBox::information(this,"موفقیت","رمز با موفقیت تغییر یافت.");
             this->updateAccountsDisplay();
         }
         else
         {
-            QMessageBox::warning(this,"Error","account ot found or  new pin was invalid");
+            QMessageBox::warning(this,"خطا","خطایی در تغییر رمز دوم رخ داد.");
         }
     }
 
