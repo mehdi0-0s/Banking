@@ -35,6 +35,8 @@ private slots:
 
     void on_editMyProfile_pushButton_clicked();
 
+    void on_print_pushButton_clicked();
+
 private:
     Ui::AdminDashboard *ui;
     LinkedList<User*> *allUsers;

@@ -250,3 +250,32 @@ void AdminDashboard::on_editMyProfile_pushButton_clicked()
     }
 }
 
+
+void AdminDashboard::on_print_pushButton_clicked()
+{
+    qDebug() << "=========================================";
+    qDebug() << "           DEBUG: SYSTEM DATA            ";
+    qDebug() << "=========================================";
+
+    qDebug() << "\n--- ADMINS ---";
+    QList<QString> adminData = this->logAdmin->viewAllAdmins(*this->allUsers);
+    for(const QString &info : adminData) {
+        qDebug() << info;
+    }
+
+    qDebug() << "\n--- CUSTOMERS ---";
+    QList<QString> customerData = this->logAdmin->viewAllCustomers(*this->allUsers);
+    for(const QString &info : customerData) {
+        qDebug() << info;
+    }
+
+    qDebug() << "\n--- ACCOUNTS ---";
+    QList<QString> accountData = this->logAdmin->viewAllAccounts(*this->allUsers);
+    for(const QString &info : accountData) {
+        qDebug() << info;
+    }
+
+    qDebug() << "=========================================";
+    QMessageBox::information(this, "Debug", "تمام اطلاعات سیستم در کنسول Application Output چاپ شد.");
+}
+

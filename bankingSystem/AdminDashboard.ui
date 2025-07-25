@@ -45,7 +45,7 @@ border-color: rgb(0, 0, 127);
         <string>کاربران</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0" colspan="4">
+        <item row="0" column="0" colspan="5">
          <widget class="QListWidget" name="customers_listWidget">
           <property name="font">
            <font>
@@ -116,6 +116,32 @@ QPushButton:hover {
          </widget>
         </item>
         <item row="1" column="2">
+         <widget class="QPushButton" name="addAccount_pushButton">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}</string>
+          </property>
+          <property name="text">
+           <string>افزودن حساب</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
          <widget class="QPushButton" name="editCustomer_pushButton">
           <property name="font">
            <font>
@@ -141,8 +167,8 @@ QPushButton:hover {
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="addAccount_pushButton">
+        <item row="1" column="4">
+         <widget class="QPushButton" name="print_pushButton">
           <property name="font">
            <font>
             <pointsize>12</pointsize>
@@ -163,7 +189,7 @@ QPushButton:hover {
 }</string>
           </property>
           <property name="text">
-           <string>افزودن حساب</string>
+           <string>دریافت اطلاعات</string>
           </property>
          </widget>
         </item>
